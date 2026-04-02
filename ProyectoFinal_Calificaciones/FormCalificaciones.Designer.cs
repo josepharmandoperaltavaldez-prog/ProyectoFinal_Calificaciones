@@ -48,6 +48,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.cmbEstudiante = new System.Windows.Forms.ComboBox();
             this.cmbMateria = new System.Windows.Forms.ComboBox();
+            this.btnExportarCSV = new System.Windows.Forms.Button();
+            this.btnExportarPDF = new System.Windows.Forms.Button();
             this.materiasBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.estudianteBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.formEstudiantesBindingSource = new System.Windows.Forms.BindingSource(this.components);
@@ -103,7 +105,7 @@
             // 
             // txtExamen
             // 
-            this.txtExamen.Location = new System.Drawing.Point(689, 88);
+            this.txtExamen.Location = new System.Drawing.Point(689, 52);
             this.txtExamen.Name = "txtExamen";
             this.txtExamen.Size = new System.Drawing.Size(142, 20);
             this.txtExamen.TabIndex = 7;
@@ -180,7 +182,7 @@
             this.dgvCalificaciones.RowHeadersVisible = false;
             this.dgvCalificaciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
             this.dgvCalificaciones.ShowEditingIcon = false;
-            this.dgvCalificaciones.Size = new System.Drawing.Size(849, 199);
+            this.dgvCalificaciones.Size = new System.Drawing.Size(849, 225);
             this.dgvCalificaciones.TabIndex = 6;
             // 
             // label1
@@ -237,7 +239,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.label6.Location = new System.Drawing.Point(730, 55);
+            this.label6.Location = new System.Drawing.Point(736, 32);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(56, 17);
             this.label6.TabIndex = 18;
@@ -260,6 +262,28 @@
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(142, 21);
             this.cmbMateria.TabIndex = 20;
+            // 
+            // btnExportarCSV
+            // 
+            this.btnExportarCSV.BackColor = System.Drawing.Color.SpringGreen;
+            this.btnExportarCSV.Location = new System.Drawing.Point(720, 107);
+            this.btnExportarCSV.Name = "btnExportarCSV";
+            this.btnExportarCSV.Size = new System.Drawing.Size(90, 23);
+            this.btnExportarCSV.TabIndex = 21;
+            this.btnExportarCSV.Text = "Exportar CSV";
+            this.btnExportarCSV.UseVisualStyleBackColor = false;
+            this.btnExportarCSV.Click += new System.EventHandler(this.btnExportarCSV_Click);
+            // 
+            // btnExportarPDF
+            // 
+            this.btnExportarPDF.BackColor = System.Drawing.Color.Red;
+            this.btnExportarPDF.Location = new System.Drawing.Point(720, 78);
+            this.btnExportarPDF.Name = "btnExportarPDF";
+            this.btnExportarPDF.Size = new System.Drawing.Size(90, 23);
+            this.btnExportarPDF.TabIndex = 22;
+            this.btnExportarPDF.Text = "Exportar PDF";
+            this.btnExportarPDF.UseVisualStyleBackColor = false;
+            this.btnExportarPDF.Click += new System.EventHandler(this.btnExportarPDF_Click);
             // 
             // materiasBindingSource
             // 
@@ -287,6 +311,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightCyan;
             this.ClientSize = new System.Drawing.Size(873, 513);
+            this.Controls.Add(this.btnExportarPDF);
+            this.Controls.Add(this.btnExportarCSV);
             this.Controls.Add(this.cmbMateria);
             this.Controls.Add(this.cmbEstudiante);
             this.Controls.Add(this.label6);
@@ -345,5 +371,7 @@
         private System.Windows.Forms.BindingSource formEstudiantesBindingSource2;
         private System.Windows.Forms.ComboBox cmbEstudiante;
         private System.Windows.Forms.ComboBox cmbMateria;
+        private System.Windows.Forms.Button btnExportarCSV;
+        private System.Windows.Forms.Button btnExportarPDF;
     }
 }

@@ -8,6 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Diagnostics;
 
 namespace ProyectoFinal_Calificaciones
 {
@@ -206,6 +210,83 @@ namespace ProyectoFinal_Calificaciones
             }
         }
 
+        private void btnExportarCSV_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Archivo CSV (*.csv)|*.csv";
+            sfd.FileName = "Calificaciones.csv";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                StringBuilder sb = new StringBuilder();
+
+                // Encabezados
+                for (int i = 0; i < dgvCalificaciones.Columns.Count; i++)
+                {
+                    sb.Append(dgvCalificaciones.Columns[i].HeaderText);
+                    if (i < dgvCalificaciones.Columns.Count - 1)
+                        sb.Append(",");
+                }
+                sb.AppendLine();
+
+                // Filas
+                foreach (DataGridViewRow fila in dgvCalificaciones.Rows)
+                {
+                    if (!fila.IsNewRow)
+                    {
+                        for (int i = 0; i < dgvCalificaciones.Columns.Count; i++)
+                        {
+                            sb.Append(fila.Cells[i].Value?.ToString());
+                            if (i < dgvCalificaciones.Columns.Count - 1)
+                                sb.Append(",");
+                        }
+                        sb.AppendLine();
+                    }
+                }
+
+                File.WriteAllText(sfd.FileName, sb.ToString(), Encoding.UTF8);
+                MessageBox.Show("Exportado a CSV correctamente");
+            }
+        }
+
+        private void btnExportarPDF_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog sfd = new SaveFileDialog();
+            sfd.Filter = "Archivo PDF (*.pdf)|*.pdf";
+            sfd.FileName = "Calificaciones.pdf";
+
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                Document doc = new Document(PageSize.A4);
+                PdfWriter.GetInstance(doc, new FileStream(sfd.FileName, FileMode.Create));
+
+                doc.Open();
+
+                PdfPTable tabla = new PdfPTable(dgvCalificaciones.Columns.Count);
+
+                // Encabezados
+                foreach (DataGridViewColumn col in dgvCalificaciones.Columns)
+                {
+                    tabla.AddCell(new Phrase(col.HeaderText));
+                }
+
+                // Datos
+                foreach (DataGridViewRow fila in dgvCalificaciones.Rows)
+                {
+                    if (!fila.IsNewRow)
+                    {
+                        foreach (DataGridViewCell celda in fila.Cells)
+                        {
+                            tabla.AddCell(celda.Value?.ToString());
+                        }
+                    }
+                }
+
+                doc.Add(tabla);
+                doc.Close();
+
+                MessageBox.Show("Exportado a PDF correctamente");
+            }
+        }
     }
 }
-
