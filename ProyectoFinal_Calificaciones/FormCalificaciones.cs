@@ -285,7 +285,7 @@ namespace ProyectoFinal_Calificaciones
                 doc.Add(tabla);
                 doc.Close();
 
-                MessageBox.Show("Exportado a PDF correctamente");
+                MessageBox.Show("PDF Exportado correctamente");
             }
         }
     }
